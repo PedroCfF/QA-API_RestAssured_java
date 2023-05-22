@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class UserService {
 
     private List<User> users = new ArrayList<>();
+    private AtomicLong nextId = new AtomicLong(); // For generating unique ids
 
-    // Constructor to populate with some initial data
     public UserService() {
-        users.add(new User(1L, "John Doe", "john@example.com"));
-        users.add(new User(2L, "Jane Smith", "jane@example.com"));
-        // Add more users if needed
+        createUser(new User(null, "John Doe", "john@example.com"));
+        createUser(new User(null, "Jane Smith", "jane@example.com"));
     }
 
     public List<User> getUsers() {
@@ -25,14 +25,15 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        Optional<User> optionalUser = users.stream()
+        return users.stream()
                 .filter(user -> user.getId().equals(id))
-                .findFirst();
-
-        return optionalUser.orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
-    public User createUser(User user) {
+    public User createUser(User newUser) {
+        Long id = nextId.incrementAndGet(); // Generate next id
+        User user = new User(id, newUser.getName(), newUser.getEmail());
         users.add(user);
         return user;
     }

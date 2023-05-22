@@ -21,7 +21,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testGetUsers() {
+    void getUsers_existingUsers_passing() {
         User user1 = new User(1L, "John Doe", "john@example.com");
         User user2 = new User(2L, "Jane Smith", "jane@example.com");
 
@@ -34,7 +34,12 @@ class UserServiceTest {
     }
 
     @Test
-    void testGetUserById() {
+    void getUsers_noUsers_failing() {
+
+    }
+
+    @Test
+    void getUserById_existingId_passing() {
         User user1 = new User(1L, "John Doe", "john@example.com");
         User user2 = new User(2L, "Jane Smith", "jane@example.com");
 
@@ -47,7 +52,12 @@ class UserServiceTest {
     }
 
     @Test
-    void testCreateUser() {
+    void getUserById_unExistingId_failing() {
+
+    }
+
+    @Test
+    void createUser_validUser_passing() {
         User newUser = new User(1L, "New User", "newuser@example.com");
 
         Mockito.when(userService.createUser(newUser)).thenReturn(newUser);
@@ -59,7 +69,12 @@ class UserServiceTest {
     }
 
     @Test
-    void testUpdateUser() {
+    void createUser_invalidUser_failing() {
+
+    }
+
+    @Test
+    void updateUser_existingIdAndValidUser_passing() {
         User user1 = new User(1L, "John Doe", "john@example.com");
         User user2 = new User(2L, "Jane Smith", "jane@example.com");
         User updatedUser = new User(1L, "Updated User", "updateduser@example.com");
@@ -73,7 +88,22 @@ class UserServiceTest {
     }
 
     @Test
-    void testDeleteUser() {
+    void updateUser_unExistingIdAndValidUser_failing() {
+
+    }
+
+    @Test
+    void updateUser_ExistingIdAndInvalidUser_failing() {
+
+    }
+
+    @Test
+    void updateUser_unExistingIdAndInvalidUser_failing() {
+
+    }
+
+    @Test
+    void testDeleteUser_existingId_passing() {
         User user = new User(1L, "John Doe", "john@example.com");
 
         userService.createUser(user);
@@ -81,5 +111,10 @@ class UserServiceTest {
         userService.deleteUser(1L);
 
         assertEquals(0, userService.getUsers().size());
+    }
+
+    @Test
+    void testDeleteUser_unExistingId_failing() {
+
     }
 }

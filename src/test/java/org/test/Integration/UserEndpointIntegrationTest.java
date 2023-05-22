@@ -39,7 +39,7 @@ class UserEndpointIntegrationTest {
 
     @Test
     void testCreateUser() {
-        User newUser = new User(3L, "Alice", "alice@example.com");
+        User newUser = new User(null,"Alice", "alice@example.com");
 
         given()
                 .contentType(ContentType.JSON)
@@ -53,7 +53,7 @@ class UserEndpointIntegrationTest {
 
     @Test
     void testUpdateUser() {
-        User updatedUser = new User(2L, "Updated", "jane.smith@example.com");
+        User updatedUser = new User(null, "Updated", "jane.smith@example.com");
 
         given()
                 .contentType(ContentType.JSON)
