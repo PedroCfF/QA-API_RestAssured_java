@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class UserServiceTest {
     public UserService userService;
@@ -34,11 +35,6 @@ class UserServiceTest {
     }
 
     @Test
-    void getUsers_noUsers_failing() {
-
-    }
-
-    @Test
     void getUserById_existingId_passing() {
         User user1 = new User(1L, "John Doe", "john@example.com");
         User user2 = new User(2L, "Jane Smith", "jane@example.com");
@@ -52,11 +48,6 @@ class UserServiceTest {
     }
 
     @Test
-    void getUserById_unExistingId_failing() {
-
-    }
-
-    @Test
     void createUser_validUser_passing() {
         User newUser = new User(1L, "New User", "newuser@example.com");
 
@@ -66,11 +57,6 @@ class UserServiceTest {
         assertEquals(1L, user.getId());
         assertEquals("New User", user.getName());
         assertEquals("newuser@example.com", user.getEmail());
-    }
-
-    @Test
-    void createUser_invalidUser_failing() {
-
     }
 
     @Test
@@ -87,20 +73,6 @@ class UserServiceTest {
         assertEquals("updateduser@example.com", user.getEmail());
     }
 
-    @Test
-    void updateUser_unExistingIdAndValidUser_failing() {
-
-    }
-
-    @Test
-    void updateUser_ExistingIdAndInvalidUser_failing() {
-
-    }
-
-    @Test
-    void updateUser_unExistingIdAndInvalidUser_failing() {
-
-    }
 
     @Test
     void testDeleteUser_existingId_passing() {
@@ -113,8 +85,4 @@ class UserServiceTest {
         assertEquals(0, userService.getUsers().size());
     }
 
-    @Test
-    void testDeleteUser_unExistingId_failing() {
-
-    }
 }
